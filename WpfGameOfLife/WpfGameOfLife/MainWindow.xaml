@@ -21,7 +21,7 @@
 
         <Viewbox Grid.Row="1" Grid.Column="0">
             <StackPanel Name="buttonsPanel"  Orientation="Horizontal">
-                <Button Name="generateButton" Content="Generate"></Button>
+                <Button Name="generateButton" Content="Generate" Click="generateButton_Click"></Button>
                 <Button Name="startButton" Content="Start"></Button>
                 <Button Name="stopButton" Content="Stop"></Button>
             </StackPanel>

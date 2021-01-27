@@ -20,6 +20,7 @@ namespace WpfGameOfLife
     /// </summary>
     public partial class MainWindow : Window
     {
+        GoLEngine engine;
         private int CellSize = 10;
         private int x0;
         private int y0;
@@ -29,7 +30,7 @@ namespace WpfGameOfLife
             x0 = (int)gameBoard.Width / 2;
             y0 = (int)gameBoard.Height / 2;
 
-            GoLEngine engine = new GoLEngine();
+            engine = new GoLEngine();
             engine.AddCell(0, 0);
             engine.AddCell(1, 0);
             engine.AddCell(2, 0);
@@ -37,7 +38,8 @@ namespace WpfGameOfLife
         }
 
         public void PrintEngine(GoLEngine engine) 
-        { 
+        {
+            gameBoard.Children.Clear();
             foreach(Cell cell in engine.Cells)
             {
                 PrintCell(cell);
@@ -55,6 +57,12 @@ namespace WpfGameOfLife
             Canvas.SetLeft(cellShape, x0 + CellSize * cell.X);
             Canvas.SetTop(cellShape, y0 + CellSize * cell.Y);
             gameBoard.Children.Add(cellShape);
+        }
+
+        private void generateButton_Click(object sender, RoutedEventArgs e)
+        {
+            engine.GenerateNextState();
+            PrintEngine(engine);
         }
     }
 }
