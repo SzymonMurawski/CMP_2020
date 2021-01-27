@@ -31,6 +31,10 @@ namespace WpfGameOfLife
             y0 = (int)gameBoard.Height / 2;
 
             engine = new GoLEngine();
+            infoPanel.DataContext = engine;
+
+
+
             engine.AddCell(0, 0);
             engine.AddCell(1, 0);
             engine.AddCell(2, 0);

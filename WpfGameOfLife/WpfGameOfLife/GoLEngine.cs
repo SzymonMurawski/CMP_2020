@@ -1,14 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace WpfGameOfLife
 {
-    public class GoLEngine
+    public class GoLEngine : INotifyPropertyChanged
     {
         public List<Cell> Cells;
-        public int Turns { get; set; }
-        public int LivingCells { get; set; }
+        private int _turns;
+        public int Turns { 
+            get { return _turns; } 
+            set {
+                if (_turns != value)
+                {
+                    _turns = value;
+                    OnPropertyChanged("Turns");
+                }
+            } }
+        private int _livingCells;
+        public int LivingCells
+        {
+            get { return _livingCells; }
+            set
+            {
+                if (_livingCells != value)
+                {
+                    _livingCells = value;
+                    OnPropertyChanged("LivingCells");
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
         public GoLEngine()
         {

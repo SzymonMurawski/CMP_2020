@@ -34,7 +34,7 @@
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0">Turn: </TextBlock>
-                <TextBlock Grid.Column="1" Text="0"></TextBlock>
+                <TextBlock Grid.Column="1" Text="{Binding Turns}"></TextBlock>
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -42,7 +42,7 @@
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0">LivingCells: </TextBlock>
-                <TextBlock Grid.Column="1" Text="0"></TextBlock>
+                <TextBlock Grid.Column="1" Text="{Binding LivingCells}"></TextBlock>
             </Grid>
         </StackPanel>
         
