@@ -31,7 +31,8 @@ namespace WpfGameOfLife
 
             GoLEngine engine = new GoLEngine();
             engine.AddCell(0, 0);
-            engine.AddCell(1, 1);
+            engine.AddCell(1, 0);
+            engine.AddCell(2, 0);
             PrintEngine(engine);
         }
 
