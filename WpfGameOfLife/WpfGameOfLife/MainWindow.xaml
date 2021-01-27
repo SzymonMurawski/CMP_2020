@@ -22,8 +22,8 @@
         <Viewbox Grid.Row="1" Grid.Column="0">
             <StackPanel Name="buttonsPanel"  Orientation="Horizontal">
                 <Button Name="generateButton" Content="Generate" Click="generateButton_Click"></Button>
-                <Button Name="startButton" Content="Start"></Button>
-                <Button Name="stopButton" Content="Stop"></Button>
+                <Button Name="startButton" Content="Start" Click="startButton_Click"></Button>
+                <Button Name="stopButton" Content="Stop" Click="stopButton_Click"></Button>
             </StackPanel>
         </Viewbox>
 

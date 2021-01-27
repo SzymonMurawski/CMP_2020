@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace WpfGameOfLife
 {
@@ -24,6 +27,7 @@ namespace WpfGameOfLife
         private int CellSize = 10;
         private int x0;
         private int y0;
+        BackgroundWorker backgroundWorker;
         public MainWindow()
         {
             InitializeComponent();
@@ -33,7 +37,11 @@ namespace WpfGameOfLife
             engine = new GoLEngine();
             infoPanel.DataContext = engine;
 
-
+            backgroundWorker = new BackgroundWorker
+            {
+                WorkerSupportsCancellation = true
+            };
+            backgroundWorker.DoWork += new DoWorkEventHandler(bw_DoWork);
 
             engine.AddCell(0, 0);
             engine.AddCell(1, 0);
@@ -41,6 +49,19 @@ namespace WpfGameOfLife
             PrintEngine(engine);
         }
 
+        private void bw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                engine.GenerateNextState();
+                Application.Current.Dispatcher.BeginInvoke(
+                  DispatcherPriority.Background,
+                  new Action(() => {
+                      PrintEngine(engine);
+                  }));
+                Thread.Sleep(1000);
+            }
+        }
         public void PrintEngine(GoLEngine engine) 
         {
             gameBoard.Children.Clear();
@@ -79,7 +100,18 @@ namespace WpfGameOfLife
             {
                 engine.AddCell(x, y);
                 PrintEngine(engine);
+                
             }
+        }
+
+        private void startButton_Click(object sender, RoutedEventArgs e)
+        {
+            backgroundWorker.RunWorkerAsync();
+        }
+
+        private void stopButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
