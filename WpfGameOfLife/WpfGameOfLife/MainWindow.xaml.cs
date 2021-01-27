@@ -20,9 +20,40 @@ namespace WpfGameOfLife
     /// </summary>
     public partial class MainWindow : Window
     {
+        private int CellSize = 10;
+        private int x0;
+        private int y0;
         public MainWindow()
         {
             InitializeComponent();
+            x0 = (int)gameBoard.Width / 2;
+            y0 = (int)gameBoard.Height / 2;
+
+            GoLEngine engine = new GoLEngine();
+            engine.AddCell(0, 0);
+            engine.AddCell(1, 1);
+            PrintEngine(engine);
+        }
+
+        public void PrintEngine(GoLEngine engine) 
+        { 
+            foreach(Cell cell in engine.Cells)
+            {
+                PrintCell(cell);
+            }
+        }
+
+        public void PrintCell(Cell cell)
+        {
+            UIElement cellShape = new Ellipse
+            {
+                Fill = Brushes.Black,
+                Width = CellSize,
+                Height = CellSize
+            };
+            Canvas.SetLeft(cellShape, x0 + CellSize * cell.X);
+            Canvas.SetTop(cellShape, y0 + CellSize * cell.Y);
+            gameBoard.Children.Add(cellShape);
         }
     }
 }
