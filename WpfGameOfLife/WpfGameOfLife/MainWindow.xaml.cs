@@ -68,5 +68,18 @@ namespace WpfGameOfLife
             engine.GenerateNextState();
             PrintEngine(engine);
         }
+
+        private void gameBoard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Point p = Mouse.GetPosition(gameBoard);
+            int x = (int)Math.Floor((p.X - x0) / CellSize);
+            int y = (int)Math.Floor((p.Y - y0) / CellSize);
+            string cellId = Cell.GetId(x, y);
+            if(!engine.Cells.Exists(c => c.Id == cellId))
+            {
+                engine.AddCell(x, y);
+                PrintEngine(engine);
+            }
+        }
     }
 }

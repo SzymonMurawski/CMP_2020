@@ -16,7 +16,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1" Width="{Binding Path=ActualWidth, ElementName=gameBoard}" Height="{Binding Path=ActualHeight, ElementName=gameBoard}">
-            <Canvas Name="gameBoard" Width="300" Height="300"></Canvas>
+            <Canvas Name="gameBoard" Width="300" Height="300" MouseLeftButtonDown="gameBoard_MouseLeftButtonDown" Background="Transparent"></Canvas>
         </Border>
 
         <Viewbox Grid.Row="1" Grid.Column="0">
