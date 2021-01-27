@@ -51,7 +51,8 @@ namespace WpfGameOfLife
 
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
-            while (true)
+            BackgroundWorker bw = (BackgroundWorker)sender;
+            while (!bw.CancellationPending)
             {
                 engine.GenerateNextState();
                 Application.Current.Dispatcher.BeginInvoke(
@@ -107,11 +108,13 @@ namespace WpfGameOfLife
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
             backgroundWorker.RunWorkerAsync();
+            startButton.IsEnabled = false;
         }
 
         private void stopButton_Click(object sender, RoutedEventArgs e)
         {
-
+            backgroundWorker.CancelAsync();
+            startButton.IsEnabled = true;
         }
     }
 }
